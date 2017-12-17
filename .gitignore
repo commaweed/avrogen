@@ -7,3 +7,9 @@ logs/
 
 # maven
 target/
+
+# output
+local/
+
+# tools
+avro-tools-1.8.1.jar
