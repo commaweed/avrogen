@@ -1,0 +1,39 @@
+[
+   {
+      "namespace": "commaweed.avro",
+      "type": "record",
+      "name": "CommaweedChunkContent",
+      "fields": [
+         {"name": "bytes", "type": "bytes"}
+      ]
+   },
+   {
+      "namespace": "commaweed.avro",
+      "type": "record",
+      "name": "CommaweedFileChunk",
+      "fields": [
+         {"name": "chunk_type", "type": "string"},
+         {"name": "payload",  "type": { "type": "array", "items": "commaweed.avro.CommaweedChunkContent"} }
+      ]
+   },
+   {
+      "namespace": "commaweed.avro",
+      "type": "record",
+      "name": "CommaweedFile",
+      "fields": [
+         {"name": "file_id", "type": "string"},
+         {"name": "parameters",  "type": {"type": "map", "values": "string"}},
+         {"name": "chunks", "type": { "type": "array", "items": "commaweed.avro.CommaweedFileChunk"} }
+      ]
+   },
+   {
+      "namespace": "commaweed.avro",
+      "type": "record",
+      "name": "CommaweedSystem",
+      "fields": [
+         {"name": "commaweed_id", "type": "string"},
+         {"name": "commaweed_header",  "type": "string"},
+         {"name": "files", "type": { "type": "array", "items": "commaweed.avro.CommaweedFile"} }
+      ]
+   }
+]

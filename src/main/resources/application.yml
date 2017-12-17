@@ -1,0 +1,26 @@
+spring.profiles.active: local
+
+# either
+
+defaults:
+   three: 3-either
+
+---
+
+# local file system
+
+spring.profiles: local
+
+defaults:
+   one: 1-local
+   two: 2-local
+
+---
+
+# hdfs file system
+
+spring.profiles: hdfs
+
+defaults:
+   one: 1-hdfs
+   two: 2-hdfs
