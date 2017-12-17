@@ -1,16 +1,20 @@
 package commaweed.generate;
 
+import commaweed.generate.cli.GeneratorOptions;
 import commaweed.generate.service.GenerateService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.util.Arrays;
+import picocli.CommandLine;
 
 @SpringBootApplication
 public class Main implements CommandLineRunner {
+
+   private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
    @Autowired
    private GenerateService genService;
@@ -23,21 +27,14 @@ public class Main implements CommandLineRunner {
 
    @Override
    public void run(String... args) {
-      System.out.println("Start generating... " + Arrays.toString(args));
+      LOGGER.info("Initializing random avro generator...");
+      GeneratorOptions options = CommandLine.populateCommand(new GeneratorOptions(), args);
 
-      String one = null;
-      String two = null;
-      String three = null;
+      if (options.isHelpRequested()) {
+         CommandLine.usage(options, System.err);
+         System.exit(0);
+      }
 
-      if (args.length > 0) one = args[0];
-      if (args.length > 1) two = args[1];
-      if (args.length > 2) three = args[2];
-
-
-      System.out.println("1: " + genService.getOne(one));
-      System.out.println("1: " + genService.getTwo(two));
-      System.out.println("1: " + genService.getThree(three));
-
-      System.exit(0);
+      genService.generateRandomFiles(options);
    }
 }

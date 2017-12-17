@@ -129,5 +129,12 @@
          <scope>test</scope>
       </dependency>
 
+      <!-- cli -->
+      <dependency>
+         <groupId>info.picocli</groupId>
+         <artifactId>picocli</artifactId>
+         <version>2.1.0</version>
+      </dependency>
+
    </dependencies>
 </project>
